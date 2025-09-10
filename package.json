@@ -1,0 +1,11 @@
+{
+  "name": "pedeve",
+  "version": "1.0.0",
+  "description": "Projeto 2º sem. 2025",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start"
+  },
+  "author": "",
+  "license": "ISC"
+}
