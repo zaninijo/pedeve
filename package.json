@@ -2,13 +2,17 @@
   "name": "pedeve",
   "version": "1.0.0",
   "description": "Projeto 2º sem. 2025",
-  "main": "index.jsx",
+  "main": "./src/index",
   "scripts": {
     "start": "expo start"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "expo": "^54.0.1"
+    "@expo/metro-runtime": "~6.1.1",
+    "expo": "^54.0.2",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-native-web": "^0.21.0"
   }
 }

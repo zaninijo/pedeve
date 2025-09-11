@@ -9,6 +9,7 @@ RUN apk add --no-cache \
     bash \
     curl \
     git \
+    git-lfs \
     openjdk17 \
     python3 \
     make \
@@ -36,11 +37,7 @@ RUN sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0" "emu
 # Instalar expo CLI localmente para usar via npx (melhor que global)
 WORKDIR /workspace
 RUN npm init -y
-RUN npm install expo
-
-# Definir usuário para segurança (opcional)
-RUN adduser -D devuser
-USER devuser
+RUN npm i
 
 # Expor portas usadas pelo Expo
 EXPOSE 19000 19001 19002 8081
