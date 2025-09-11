@@ -2,10 +2,13 @@
   "name": "pedeve",
   "version": "1.0.0",
   "description": "Projeto 2º sem. 2025",
-  "main": "index.js",
+  "main": "index.jsx",
   "scripts": {
     "start": "expo start"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "expo": "^54.0.1"
+  }
 }
