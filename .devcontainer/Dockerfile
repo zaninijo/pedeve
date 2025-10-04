@@ -38,6 +38,7 @@ RUN sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0" "emu
 WORKDIR /workspace
 RUN npm init -y
 RUN npm i
+RUN npm i -g eas-cli
 
 # Expor portas usadas pelo Expo
 EXPOSE 19000 19001 19002 8081
