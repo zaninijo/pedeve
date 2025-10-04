@@ -3,8 +3,26 @@
     "name": "pedeve",
     "slug": "pedeve-app",
     "version": "1.0.0",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "android",
+      "web"
+    ],
     "orientation": "portrait",
-    "backgroundColor": "#ffffff"
+    "backgroundColor": "#ffffff",
+    "plugins": [
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "O Pedeve precisa da permissão para usar a câmera para escanear produtos!",
+          "enableCodeScanner": true
+        }
+      ]
+    ],
+    "android": {
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
+      "package": "com.pedeveapp"
+    }
   }
 }

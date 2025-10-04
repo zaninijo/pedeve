@@ -34,7 +34,7 @@ RUN yes | sdkmanager --licenses
 # Instalar as plataformas e ferramentas Android necessárias
 RUN sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0" "emulator"
 
-# Instalar expo CLI localmente para usar via npx (melhor que global)
+# Instalar pacotes npm
 WORKDIR /workspace
 RUN npm init -y
 RUN npm i
