@@ -3,20 +3,23 @@
   "version": "1.0.0",
   "description": "Projeto 2º sem. 2025",
   "main": "./src/index",
+  "type": "module",
   "scripts": {
-    "start": "expo start",
-    "android": "expo run:android",
-    "ios": "expo run:ios"
+    "web": "expo start -w",
+    "serve": "node scripts/serve.js",
+    "android": "node scripts/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@expo/metro-runtime": "~6.1.1",
-    "expo": "^54.0.2",
-    "react": "19.1.1",
-    "react-dom": "19.1.1",
-    "react-native-vision-camera": "^4.7.2",
-    "react-native-web": "^0.21.0",
-    "react-native": "0.81.4"
+    "@expo/metro-runtime": "~6.1.2",
+    "expo": "54.0.12",
+    "expo-updates": "~29.0.12",
+    "qrcode": "^1.5.4",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.4",
+    "react-native-vision-camera": "4.7.2",
+    "react-native-web": "0.21.0"
   }
 }

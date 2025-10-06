@@ -1,4 +1,4 @@
-package com.pedeveapp
+package com.pentdriveapp
 
 import android.os.Build
 import android.os.Bundle
