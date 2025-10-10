@@ -38,6 +38,16 @@ O front-end será responsável por:
 
 ---
 
+## 📲 Screenshots
+
+![Tela inicial](display/Tela%20inicial.png)
+![Adicionar produtos através da câmera](display/Camera%20Add.png)
+![Carrinho de Produtos](display/Carrinho.png)
+![Selecionar Método de Pagamento](display/Metodo%20Pagamento.png)
+![Aguardando Pagamento por Aproximação](display/Aguardando%20Pagamento%20Aprox..png)
+
+---
+
 ## ⚙️ Status do Projeto
 
 🚧 **Em desenvolvimento** — atualmente na fase de estruturação dos componentes e layout base.  
