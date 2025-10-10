@@ -38,7 +38,7 @@ O front-end será responsável por:
 
 ---
 
-## 📲 Screenshots
+## 📲 Design
 
 ![Tela inicial](display/Tela%20inicial.png)
 ![Adicionar produtos através da câmera](display/Camera%20Add.png)
