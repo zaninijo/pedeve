@@ -1,16 +1,21 @@
-# 📱 Pentdrive (Front-end)
+# 📱 Pentdraive (Front-end)
+
+![Banner](display/banner.png)
 
 > Transformando o celular em um ponto de venda autônomo completo.
 
-O **Pentdrive** é um aplicativo mobile que **transforma qualquer smartphone em um ponto de venda moderno e autônomo**, oferecendo uma alternativa acessível para quem quer utilizar tecnologia de vendas sem grandes investimentos.
+O Pentdraive é um aplicativo mobile que <strong>transforma qualquer smartphone* em um ponto de venda moderno, de autoatendimento e singular</strong>, oferecendo uma alternativa simples e acessível para pequenos empreendedores, estabelecimentos e projetos que desejam explorar soluções móveis de vendas sem depender de infraestrutura cara ou complexa.
+<small>*Desde que tenha uma câmera frontal com nitidez razoável e NFC embutido.</small>
+
+Esse aplicativo é um **Proof of Concept**. Na prática, ele não pode ser utilizado como ponto de venda real, pois não realiza a emissão de notas fiscais nem está integrado a sistemas fiscais oficiais. **Seu objetivo é apenas demonstrar a viabilidade do conceito.**
 
 ---
 
 ## 🚀 Visão Geral do Projeto
 
 O aplicativo permitirá que o usuário:
-- 🧾 Registre e gerencie produtos com leitura de **códigos de barras** pela câmera;  
-- 💳 Realize **pagamentos por aproximação (NFC)**;  
+- 🧾 Registre e adicione ao carrinho produtos lendo o **códigos de barras** da embalagem pela câmera;  
+- 💳 Realize **pagamentos por aproximação (NFC) e PIX**;
 - 📊 Acompanhe vendas e estoque diretamente pelo celular;  
 - ⚙️ Utilize o sistema de forma **autônoma**, sem depender de equipamentos adicionais.
 
@@ -18,20 +23,20 @@ O aplicativo permitirá que o usuário:
 
 ## 🧠 Tecnologias utilizadas
 
-> Ferramentas e bibliotecas que compõem o front-end.
+> Principais ferramentas e bibliotecas que compõem o front-end.
 
 - **React Native**  
 - **Expo**  
 - **TypeScript**  
 - **Figma** (prototipagem e design da interface)  
-- **Docker** + **Android SDK** (ambiente de desenvolvimento e emulação)
+- **Docker** + **Android SDK** (ambiente de desenvolvimento)
 
 ---
 
 ## 🧩 Estrutura do Front-end
 
 O front-end será responsável por:
-- Exibir a **interface principal do ponto de venda** (catálogo, carrinho, checkout e relatórios);  
+- Exibir a **interface principal do ponto de venda** (carrinho, checkout, etc.);  
 - Gerenciar a **navegação entre telas** e o **estado global** da aplicação;  
 - Integrar-se futuramente a uma **API externa**, responsável pela autenticação, persistência de dados e processamento de pagamentos;  
 - Utilizar **APIs nativas** do dispositivo via Expo (NFC e câmera).
@@ -39,6 +44,8 @@ O front-end será responsável por:
 ---
 
 ## 📲 Design
+
+> Conceitos iniciais feitos no Figma.
 
 ![Tela inicial](display/Tela%20inicial.png)
 ![Adicionar produtos através da câmera](display/Camera%20Add.png)
@@ -60,10 +67,13 @@ Etapas previstas:
 - [ ] Integração com câmera (leitura de código de barras)  
 - [ ] Integração com NFC para pagamentos  
 - [ ] Conexão com API externa (em desenvolvimento por outro colaborador)
+- [ ] Criar documentação para desenvolvimento/uso do aplicativo
 
 ---
 
 ## 🖥️ Instruções de Desenvolvimento
+
+O ambiente de desenvolvimento roda em uma container Docker com o Android SDK, o que deixa o processo altamente portátil, pensado para o desenvolvimento em nuvem com o GitHub Codespaces.
 
 > Antes de iniciar, leia e configure os arquivos de ambiente:
 - `.devcontainer/devcontainer.json`  
