@@ -25,6 +25,9 @@
         "msjsdiag.debugger-for-chrome",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode"
+      ],
+      "typescript.tsserver.exclude": [
+        "**/node_modules"
       ]
     }
   }

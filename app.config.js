@@ -12,6 +12,22 @@ export function getLocalIp() {
   return "127.0.0.1";
 }
 
+
+/* Configurações do aplicativo */
+export const API_ADDRESS = "localhost:8080";
+// Quanto tempo demora para aparecer o aviso de inatividade
+export const INACTIVITY_WARNING = 3 * 60 * 1000; // 3 min
+// Quanto tempo em inatividade para resetar o aplicativo
+export const INACTIVITY_TRIGGER = 5* 60 * 1000; // 5 min
+
+
+
+/* Configurações para desenvolvimento */
+/*
+    ATENÇÃO: ao realizar mudanças nas configurações abaixo, é necessário re-executar o script
+    de prebuild do Expo para aplicar as alterações.
+    `npx expo prebuild`
+*/
 export const CODESPACE_NAME = process.env.CODESPACE_NAME;
 export const DOMAIN = process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN || 'app.github.dev';
 export const PORT = process.env.EXPO_PORT || 8081;
@@ -24,7 +40,6 @@ export const OTA_URL = CODESPACE_NAME && DOMAIN
     : `http://${getLocalIp()}:${PORT}`;
 
 export default ({ config }) => {
-
     return {
         ...config,
         "expo": {
@@ -46,9 +61,12 @@ export default ({ config }) => {
                 [
                     "react-native-vision-camera",
                     {
-                        "cameraPermissionText": "O Pentdrive precisa ter acesso à câmera para escanear produtos.",
+                        "cameraPermissionText": "O Pentdraive precisa ter acesso à câmera para escanear produtos.",
                         "enableCodeScanner": true
                     }
+                ],
+                [
+                    "expo-font"
                 ]
             ],
             "android": {
@@ -56,7 +74,7 @@ export default ({ config }) => {
                     "android.permission.CAMERA",
                     "android.permission.NFC"
                 ],
-                "package": "com.pentdriveapp"
+                "package": "com.pentdraive.app"
             }
         }
     }

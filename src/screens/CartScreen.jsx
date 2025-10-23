@@ -1,0 +1,46 @@
+import { ScrollView, View } from "react-native";
+import { useCart } from "../contexts/cartContext";
+import CartListItem from "../components/CartListItem";
+import { useCallback } from "react";
+import ButtonL from "../components/ButtonL";
+import { useNavContext } from "../contexts/navContext";
+import { colors } from "../styles/globalStyles";
+
+export default function CartScreen() {
+  
+  const { cart, updateCartProduct } = useCart();
+
+  const { goToScreen } = useNavContext()
+
+  const increment = useCallback((cartItem, incrementQnt) => {
+    updateCartProduct(cartItem.barcode, {...cartItem, quantity: cartItem.quantity + incrementQnt})
+  }, [])
+
+  return (
+    <View>
+      <ScrollView>
+        {
+          cart.map((cartItem) => {
+            return (
+              <CartListItem
+                cartItem={cartItem}
+
+                increase={() => {
+                  increment(cartItem, 1);
+                }}
+                
+                decrease={() => {
+                  increment(cartItem, -1);
+                }}
+              />
+            );
+          })
+        }
+
+      </ScrollView>
+      <ButtonL color={colors.white} callback={() => {goToScreen("scanner")}}>Escanear Produto</ButtonL>
+      <ButtonL color={colors.peacockTeal} callback={() => {goToScreen("checkout")}}>Finalizar Compra</ButtonL>
+      <ButtonL color={colors.rubyRed} callback={() => {goToScreen("home")}}>Cancelar</ButtonL>
+    </View>
+  )
+}

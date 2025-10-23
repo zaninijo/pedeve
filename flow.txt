@@ -1,0 +1,18 @@
+
+a aplicação segue o seguinte fluxo:
+
+tela inicial
+
+(usuário aperta na tela)
+
+carregamento *fetch da lista de produtos
+
+abre tela para escaneamento de produtos *usuario escanea seus produtos e vai para a tela de carrinho
+
+usuario verifica o carrinho, faz algumas alterações e vai para a tela de seleção de método de pagamento
+
+selecionado o metodo de pagamento, o usuario pode aproximar o seu cartão de crédito/debito ou escanearo QR-Code PIX e realizar o pagamento
+
+após isso, aparece a tela de compra concluida (ou não-sucedida) por alguns segundos e o aplicativo volta para a tela inicial
+
+QUALQUER ERRO NESSE FLUXO IRÁ FAZER O APLICATIVO SOLTAR UM ALERTA DE ERRO "Alguma coisa deu errado, tente novamente mais tarde" E VOLTAR PARA A TELA INICIAL

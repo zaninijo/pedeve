@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.pentdriveapp'
+    namespace 'com.pentdraive.app'
     defaultConfig {
-        applicationId 'com.pentdriveapp'
+        applicationId 'com.pentdraive.app'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
