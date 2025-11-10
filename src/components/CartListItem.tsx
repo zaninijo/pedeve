@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text } from "react-native"
 import IncrementButton from "./IncrementButton";
-import { CartItem } from "../contexts/cartContext";
+import { CartItem } from "../contexts/CartContext";
 
 const style = StyleSheet.create({
 

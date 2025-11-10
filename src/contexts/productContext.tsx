@@ -27,7 +27,9 @@ interface ProductDataContextType {
 const ProductContext = createContext<ProductDataContextType | null>(null);
 
 async function fetchProducts(): Promise<ListedProduct[]> {
-  return await apiFetch(["produtos"], { method: "GET" }, true)
+  const response = await apiFetch(["products"], { method: "GET" }, true);
+  const data = await response.json();
+  return data;
 }
 
 export function ProductDataProvider({ children }: { children: ReactNode }) {

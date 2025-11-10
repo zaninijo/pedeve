@@ -1,9 +1,11 @@
 import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
-import { useNavContext } from "../contexts/navContext";
-import { useProductsData } from "../contexts/productContext";
-import { useCart } from "../contexts/cartContext";
+import { useNavContext } from "../contexts/NavContext";
+import { useProductsData } from "../contexts/ProductContext";
+import { useCart } from "../contexts/CartContext";
 import defaultAlert from "../utils/defaultAlert";
 import { useEffect } from "react";
+import useModal from "../hooks/useModal";
+import AdminAuthModal from '../components/modals/AdminAuthModal';
 
 const styles = StyleSheet.create({
   fullscreen: {
@@ -20,8 +22,8 @@ const styles = StyleSheet.create({
 export default function HomeScreen() {
   const { goToScreen } = useNavContext();
   const { flushCart } = useCart();
-  const { updateProductList, isLoading: productListLoading } =
-    useProductsData();
+  const { updateProductList, isLoading: productListLoading } = useProductsData();
+  const { showModal, flushModal } = useModal();
 
   // Limpa o carrinho toda vez que abre a tela
   useEffect(flushCart, []);
@@ -48,7 +50,7 @@ export default function HomeScreen() {
 
       <link
         onClick={() => {
-          goToScreen("admin");
+          showModal(AdminAuthModal, { onClose: flushModal });
         }}
         // Sobrepondo a captura do TouchableWithoutFeedback
         style={{ zIndex: 5 }}
@@ -57,7 +59,7 @@ export default function HomeScreen() {
       </link>
 
       {
-        // Overlay durante o fetcn da lista de produtos
+        // Overlay durante o fetch da lista de produtos
         // TODO: Adicionar spinner de carregamento
         productListLoading && (
           <View>

@@ -1,16 +1,20 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as NavigationBar from 'expo-navigation-bar';
-import { useNavContext } from './contexts/navContext';
+import { useNavContext } from './contexts/NavContext';
 import { useKeepAwake } from 'expo-keep-awake';
 import IdleManager from './components/IdleManager';
-import { useCart } from './contexts/cartContext';
+import CheckoutScreen from './screens/CheckoutScreen';
+import ScannerScreen from './screens/ScannerScreen';
 
 import HomeScreen from './screens/HomeScreen';
 import CartScreen from './screens/CartScreen'
 import { INACTIVITY_TRIGGER, INACTIVITY_WARNING } from '../app.config';
+import { useAuth } from './contexts/AuthContext';
+import { View } from 'react-native';
+import useModal from './hooks/useModal';
 
-export default function App() {
+export default function App({children}) {
   useKeepAwake();
 
   useEffect(() => {
@@ -19,17 +23,26 @@ export default function App() {
     NavigationBar.setBehaviorAsync('overlay-swipe');
   }, []);
 
-  const { flushCart } = useCart();
   const { activeScreen, OverrideActiveScreen  } = useNavContext();
+  const { authToken } = useAuth()
+  const { modal } = useModal();
+
+  if (!authToken) {
+    return <View>
+      {/* TODO: tela de login */}
+    </View>
+  }
 
   return (
     <SafeAreaProvider>
 
+      {modal /* Overlay de modal, a princípio inativo. */}
+
       {/* Router básico de telas */}
       {(activeScreen == "home" || !activeScreen) && <HomeScreen /> }
-      {activeScreen == "scanner" && <HomeScreen /> }
+      {activeScreen == "scanner" && <ScannerScreen /> }
       {activeScreen == "cart" && <CartScreen /> }
-      {activeScreen == "checkout" && <HomeScreen /> }
+      {activeScreen == "checkout" && <CheckoutScreen /> }
       
       {activeScreen == "admin" && <HomeScreen /> }
       {activeScreen == "adminScanner" && <HomeScreen /> }
@@ -50,6 +63,7 @@ export default function App() {
           }
         ]
       } />
+
     </SafeAreaProvider>
   );
 }

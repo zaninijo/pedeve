@@ -67,6 +67,12 @@ export default ({ config }) => {
                 ],
                 [
                     "expo-font"
+                ],
+                [
+                    "react-native-nfc-manager"
+                ],
+                [
+                    "expo-secure-store"
                 ]
             ],
             "android": {

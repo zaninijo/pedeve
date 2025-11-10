@@ -1,9 +1,9 @@
 import { ScrollView, View } from "react-native";
-import { useCart } from "../contexts/cartContext";
+import { useCart } from "../contexts/CartContext";
 import CartListItem from "../components/CartListItem";
 import { useCallback } from "react";
 import ButtonL from "../components/ButtonL";
-import { useNavContext } from "../contexts/navContext";
+import { useNavContext } from "../contexts/NavContext";
 import { colors } from "../styles/globalStyles";
 
 export default function CartScreen() {

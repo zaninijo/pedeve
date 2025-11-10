@@ -1,11 +1,15 @@
 import { View } from "react-native";
-import { useCart } from "../contexts/cartContext";
+import { useCart } from "../contexts/CartContext";
 import CartListItem from "../components/CartListItem";
 import BarcodeScanner from "../components/BarcodeScanner"
+import ButtonL from "../components/ButtonL";
+import { useNavContext } from "../contexts/NavContext";
 
 export default function ScannerScreen() {
   const { cart, updateCartProduct, addCartProduct } = useCart();
   const lastItem = cart[cart.length - 1] || null;
+
+  const { goToScreen } = useNavContext();
 
   return (
     <View>
@@ -27,6 +31,7 @@ export default function ScannerScreen() {
           });
         }}
       />
+      <ButtonL callback={() => goToScreen("cart")}>Ver Carrinho</ButtonL>
     </View>
   );
 }

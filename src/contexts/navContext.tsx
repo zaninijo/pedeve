@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useRef, useState, useEffect, useCallback } from "react";
+import { createContext, ReactNode, useContext, useRef, useState, useEffect, useCallback, RefObject } from "react";
 import { BackHandler } from "react-native";
 
 type ScreenName =
@@ -10,16 +10,20 @@ type ScreenName =
   | "adminScanner"
   | "adminStats";
 
+type ScreenNavMethod = (screen: ScreenName, args?: Record<string, string>) => void;
+
 const NavContext = createContext<{
   activeScreen: ScreenName;
-  goToScreen: (value: ScreenName) => void;
+  goToScreen: ScreenNavMethod;
+  OverrideActiveScreen: ScreenNavMethod;
   goBack: () => void;
-  OverrideActiveScreen: (screen: ScreenName) => void;
+  screenArgs: RefObject<Record<string, string>|null>;
 } | null>(null);
 
 export function NavContextProvider({ children }: { children: ReactNode }) {
   const [activeScreen, setActiveScreenState] = useState<ScreenName>("home");
-  const lastScreen = useRef<ScreenName | null>(null);
+  const lastScreen = useRef<ScreenName|null>(null);
+  const screenArgs = useRef<Record<string, string>|null>(null);
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
@@ -33,19 +37,31 @@ export function NavContextProvider({ children }: { children: ReactNode }) {
     return () => backHandler.remove();
   }, []);
 
-  // Wrapper para setActiveScreenState que limpa o lastScreen
-  const OverrideActiveScreen = useCallback((value: ScreenName) => {
-    setActiveScreenState(value);
+  // Wrapper para setActiveScreenState que limpa o lastScreen e passa argumentos para a tela
+  const OverrideActiveScreen = useCallback<ScreenNavMethod>((screenName, args) => {
+    screenArgs.current = null;
+    if (args) {
+      screenArgs.current = args
+    }
+    
+    setActiveScreenState(screenName);
     lastScreen.current = null;
   }, [])
 
-  // Wrapper para setActiveScreenState que atualiza o lastScreen
-  const goToScreen = useCallback((screenName: ScreenName) => {
+  // Wrapper para setActiveScreenState que atualiza o lastScreen e passa argumentos para a tela
+  const goToScreen = useCallback<ScreenNavMethod>((screenName, args) => {
+    screenArgs.current = null;
+    if (args) {
+      screenArgs.current = args
+    }
+
     lastScreen.current = activeScreen;
-    setActiveScreenState(screenName)
+    setActiveScreenState(screenName);
   }, [])
 
   const goBack = useCallback(() => {
+    screenArgs.current = null;
+
     const lastScreenUpdate = lastScreen.current?.toString();
     lastScreen.current = activeScreen;
     // @ts-expect-error
@@ -53,7 +69,7 @@ export function NavContextProvider({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <NavContext.Provider value={{ activeScreen, goToScreen, goBack, OverrideActiveScreen }}>
+    <NavContext.Provider value={{ activeScreen, goToScreen, goBack, OverrideActiveScreen, screenArgs }}>
       {children}
     </NavContext.Provider>
   );

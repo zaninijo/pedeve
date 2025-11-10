@@ -1,0 +1,73 @@
+import { View, ScrollView } from "react-native";
+import { useNavContext } from "../contexts/NavContext"
+import ButtonL from "../components/ButtonL";
+import { colors } from "../styles/globalStyles";
+import { ListedProduct, useProductsData } from "../contexts/ProductContext";
+import ProductEditListItem from "../components/ProductEditListItem"
+import { useCallback, useState } from "react";
+import useModal from "../hooks/useModal";
+import ProductEditModal from "../components/modals/ProductEditModal";
+
+export const credentialArgName = "credential"
+
+export default function AdminScreen() {
+  const { screenArgs, goToScreen } = useNavContext();
+  const { productsData } = useProductsData();
+
+  const { showModal } = useModal();
+
+  const [editedProducts, setEditedProducts] = useState(productsData!);
+
+  // Adiciona ou sobrescreve um produto
+  const setProduct = useCallback((productData: ListedProduct) => {
+    const newProductList = editedProducts;
+    const { id: productId } = productData
+    
+    const foundIndex = newProductList.findIndex((p) => {
+      return p.id = productId;
+    });
+
+    if (foundIndex > -1) {
+      newProductList.splice(foundIndex, 1, productData);
+    }
+    else {
+      newProductList.push(productData);
+    }
+
+    setEditedProducts(newProductList);
+  }, [editedProducts, screenArgs])
+
+  // Remove um produto na lista usando seu id
+  function removeProduct(productId: number) {
+    const newProductList = editedProducts;
+    
+    const foundIndex = newProductList.findIndex((p) => {
+      return p.id = productId;
+    });
+
+    if (foundIndex > -1) {
+      newProductList.splice(foundIndex, 1);
+      setEditedProducts(newProductList);
+    }
+  }
+
+  const adminCredential = screenArgs.current?.[credentialArgName];
+
+  if (!adminCredential) {
+    throw new Error("A tela de administração foi executada sem argumentos de credencial.");
+  }
+
+  
+  return <View>
+
+    <ScrollView>
+      {productsData!.map((pData) => {
+        return <ProductEditListItem productData={pData} setProductCb={setProduct} deleteProductCb={removeProduct} />
+      })}
+    </ScrollView>
+
+    <ButtonL color={colors.white} callback={() => showModal(ProductEditModal, { saveChangesCb: setProduct})}>Adicionar Produto</ButtonL>
+    <ButtonL color={colors.peacockTeal} callback={() => {goToScreen("home")}}>Finalizar Edição</ButtonL>
+  </View>
+
+}

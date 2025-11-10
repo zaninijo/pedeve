@@ -1,6 +1,6 @@
 # 📱 Pentdraive (Front-end)
 
-![Banner](display/banner.png)
+![Banner](mockups/banner.png)
 
 > Transformando o celular em um ponto de venda autônomo completo.
 
@@ -47,11 +47,11 @@ O front-end será responsável por:
 
 > Conceitos iniciais feitos no Figma.
 
-![Tela inicial](display/Tela%20inicial.png)
-![Adicionar produtos através da câmera](display/Camera%20Add.png)
-![Carrinho de Produtos](display/Carrinho.png)
-![Selecionar Método de Pagamento](display/Metodo%20Pagamento.png)
-![Aguardando Pagamento por Aproximação](display/Aguardando%20Pagamento%20Aprox..png)
+![Tela inicial](mockups/Tela%20inicial.png)
+![Adicionar produtos através da câmera](mockups/Camera%20Add.png)
+![Carrinho de Produtos](mockups/Carrinho.png)
+![Selecionar Método de Pagamento](mockups/Metodo%20Pagamento.png)
+![Aguardando Pagamento por Aproximação](mockups/Aguardando%20Pagamento%20Aprox..png)
 
 ---
 

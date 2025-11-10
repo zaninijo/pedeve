@@ -8,7 +8,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import { Alert } from "react-native";
-import { useProductsData, ListedProduct } from "./productContext";
+import { useProductsData, ListedProduct } from "./ProductContext";
 
 export interface CartItem extends ListedProduct {
   quantity: number;
