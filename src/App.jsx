@@ -25,18 +25,18 @@ export default function App({children}) {
 
   const { activeScreen, OverrideActiveScreen  } = useNavContext();
   const { authToken } = useAuth()
-  const { modal } = useModal();
+  const { modal, showModal } = useModal();
 
-  if (!authToken) {
-    return <View>
-      {/* TODO: tela de login */}
-    </View>
-  }
+  useEffect(() => {
+    if (!authToken) {
+      showModal()
+    }
+  }, [authToken])
 
   return (
     <SafeAreaProvider>
 
-      {modal /* Overlay de modal, a princípio inativo. */}
+      {modal /* Componente overlay de modal, a princípio inativo. */}
 
       {/* Router básico de telas */}
       {(activeScreen == "home" || !activeScreen) && <HomeScreen /> }

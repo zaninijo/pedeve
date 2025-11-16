@@ -33,15 +33,25 @@ RUN mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools && \
 RUN yes | sdkmanager --licenses
 
 # Instalar as plataformas e ferramentas Android necessárias
-RUN sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0" "emulator"
+RUN sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0"
+
+
+# Copia dependências do projeto
+WORKDIR /workspace
+COPY package*.json ./
 
 # Instalar pacotes npm
-WORKDIR /workspace
-RUN npm init -y
-RUN npm i
+RUN npm install
+
+# Copia o projeto
+COPY . .
+
+# Desabilita espera por comandos
+ENV EXPO_NO_DOCTOR=1
+ENV CI=true
 
 # Atualizar o endereço da máquina no Manifest
-RUN npx expo prebuild
+RUN npx expo prebuild --non-interactive
 
 # Definir CMD padrão para abrir shell
 CMD ["bash"]

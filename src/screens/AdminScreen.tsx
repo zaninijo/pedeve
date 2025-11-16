@@ -7,13 +7,13 @@ import ProductEditListItem from "../components/ProductEditListItem"
 import { useCallback, useState } from "react";
 import useModal from "../hooks/useModal";
 import ProductEditModal from "../components/modals/ProductEditModal";
+import { apiFetch } from "../utils/api";
 
 export const credentialArgName = "credential"
 
 export default function AdminScreen() {
   const { screenArgs, goToScreen } = useNavContext();
   const { productsData } = useProductsData();
-
   const { showModal } = useModal();
 
   const [editedProducts, setEditedProducts] = useState(productsData!);
@@ -35,7 +35,7 @@ export default function AdminScreen() {
     }
 
     setEditedProducts(newProductList);
-  }, [editedProducts, screenArgs])
+  }, [editedProducts, screenArgs]);
 
   // Remove um produto na lista usando seu id
   function removeProduct(productId: number) {
@@ -57,17 +57,20 @@ export default function AdminScreen() {
     throw new Error("A tela de administração foi executada sem argumentos de credencial.");
   }
 
+  function saveChanges() {
+    apiFetch(["products/update"], { method:"POST", body: editedProducts.toString() }, true)
+  }
   
   return <View>
 
     <ScrollView>
-      {productsData!.map((pData) => {
-        return <ProductEditListItem productData={pData} setProductCb={setProduct} deleteProductCb={removeProduct} />
+      {productsData!.map((pdata) => {
+        return <ProductEditListItem productData={pdata} setProductCb={setProduct} deleteProductCb={removeProduct} />
       })}
     </ScrollView>
 
-    <ButtonL color={colors.white} callback={() => showModal(ProductEditModal, { saveChangesCb: setProduct})}>Adicionar Produto</ButtonL>
-    <ButtonL color={colors.peacockTeal} callback={() => {goToScreen("home")}}>Finalizar Edição</ButtonL>
+    <ButtonL color={colors.white} callback={() => showModal(ProductEditModal, { saveChangesCb: setProduct })}>Adicionar Produto</ButtonL>
+    <ButtonL color={colors.peacockTeal} callback={() => { goToScreen("home") }}>Finalizar Edição</ButtonL>
   </View>
 
 }

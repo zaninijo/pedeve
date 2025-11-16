@@ -5,10 +5,10 @@ export default function useModal() {
 
   const showModal = useCallback(<P extends object = {}>(
     Modal: ComponentType<P>,
-    props: P
+    props?: P
   ) => {
     
-    setModal(<Modal {...(props as P)} onClose={() => setModal(null)} />);
+    setModal(<Modal {...(props as P)||{}} onClose={flushModal} />);
   }, []);
 
   function flushModal() {

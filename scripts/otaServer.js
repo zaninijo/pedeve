@@ -4,14 +4,14 @@ import path from "path";
 import os from "os";
 import { execSync } from "child_process";
 import QRCode from "qrcode";
+import { OTA_CONFIG } from "../app.config.js";
 
-const PORT = process.env.EXPO_PORT || 8081;
-const APK_PATH = path.resolve("android/app/build/outputs/apk/debug/app-debug.apk");
-const BUNDLE_DIR = path.resolve("dist");
-const OTA_ENDPOINT = "/ota";
+const { APK_PATH, BUNDLE_DIR, OTA_ENDPOINT, PORT } = OTA_CONFIG
 
-// Detecta se o --build foi passado
+// Detecta se o comando inclui build para efetuar o build do app. 
 const shouldBuild = process.argv.includes("--build");
+
+console.log(process.cwd());
 
 function getLocalIp() {
   const interfaces = os.networkInterfaces();
@@ -26,7 +26,7 @@ function getLocalIp() {
 function buildApk() {
   console.log("Iniciando build do APK...");
   try {
-    execSync("./gradlew assembleDebug", { cwd: "android", stdio: "inherit" });
+    execSync("../android/gradlew assembleDebug", { cwd: "android", stdio: "inherit" });
   } catch (err) {
     console.error("Erro durante o build do APK:", err.message);
     process.exit(1);
@@ -55,7 +55,7 @@ function startServer() {
 
   const codespace = process.env.CODESPACE_NAME;
   const domain = process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN;
-
+  
   const hostUrl = codespace && domain
     ? `https://${PORT}-${codespace}.${domain}`
     : `http://${getLocalIp()}:${PORT}`;
@@ -117,10 +117,9 @@ function startServer() {
 
 // Build opcional
 if (shouldBuild) {
+  console.log("Criando build e bundling do aplicativo...");
   buildApk();
   exportBundle();
-} else {
-  console.log("Ignorando build do APK e bundle. Apenas iniciando servidor...");
 }
 
 startServer();

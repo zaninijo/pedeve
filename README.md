@@ -4,7 +4,7 @@
 
 > Transformando o celular em um ponto de venda autônomo completo.
 
-O Pentdraive é um aplicativo mobile que <strong>transforma qualquer smartphone* em um ponto de venda moderno, de autoatendimento e singular</strong>, oferecendo uma alternativa simples e acessível para pequenos empreendedores, estabelecimentos e projetos que desejam explorar soluções móveis de vendas sem depender de infraestrutura cara ou complexa.
+O Pentdraive é um <strong>aplicativo mobile que transforma qualquer smartphone* em um ponto de venda de autoatendimento, moderno e singular</strong>, oferecendo uma alternativa simples e acessível para pequenos empreendedores, estabelecimentos e projetos que desejam explorar soluções móveis de vendas sem depender de infraestrutura cara ou complexa.
 <small>*Desde que tenha uma câmera frontal com nitidez razoável e NFC embutido.</small>
 
 Esse aplicativo é um **Proof of Concept**. Na prática, ele não pode ser utilizado como ponto de venda real, pois não realiza a emissão de notas fiscais nem está integrado a sistemas fiscais oficiais. **Seu objetivo é apenas demonstrar a viabilidade do conceito.**
@@ -29,7 +29,7 @@ O aplicativo permitirá que o usuário:
 - **Expo**  
 - **TypeScript**  
 - **Figma** (prototipagem e design da interface)  
-- **Docker** + **Android SDK** (ambiente de desenvolvimento)
+- **Docker** + **Node** + **Android SDK** (ambiente de desenvolvimento)
 
 ---
 
@@ -89,5 +89,5 @@ npx expo start
 ```
 Para **gerar uma build nova**:
 ```bash
-npm run serve --build
+npm run serve:build
 ```

@@ -30,10 +30,12 @@ export const INACTIVITY_TRIGGER = 5* 60 * 1000; // 5 min
 */
 export const CODESPACE_NAME = process.env.CODESPACE_NAME;
 export const DOMAIN = process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN || 'app.github.dev';
-export const PORT = process.env.EXPO_PORT || 8081;
-export const APK_PATH = path.resolve("android/app/build/outputs/apk/debug/app-debug.apk");
-export const BUNDLE_DIR = path.resolve("dist");
-export const OTA_ENDPOINT = "/ota";
+
+const PORT = process.env.EXPO_PORT || 8081;
+const APK_PATH = path.resolve("android/app/build/outputs/apk/debug/app-debug.apk");
+const BUNDLE_DIR = path.resolve("dist");
+const OTA_ENDPOINT = "/ota";
+export const OTA_CONFIG = { PORT, APK_PATH, BUNDLE_DIR, OTA_ENDPOINT }
 
 export const OTA_URL = CODESPACE_NAME && DOMAIN
     ? `https://${PORT}-${CODESPACE_NAME}.${DOMAIN}`
