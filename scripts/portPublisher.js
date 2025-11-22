@@ -8,10 +8,10 @@ import { promisify } from "util";
 import { exec as execCb } from "child_process";
 
 const exec = promisify(execCb);
-const codespace = process.env.CODESPACE_NAME;
+const codespace = process.env.CODESPACES;
 
 if (!codespace) {
-  console.log("A variável de ambiente CODESPACE_NAME não está definida. Pulando a publicação de portas...");
+  console.log("A variável de ambiente CODESPACES não está definida. Pulando a publicação de portas...");
   process.exit(0);
 }
 

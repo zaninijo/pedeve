@@ -1,57 +1,48 @@
-# Usamos Node 20 Alpine, leve e atual
-FROM node:20-alpine
+# Dockerfile modificado para padrão devcontainer
+FROM node:20-bookworm-slim
 
-ENV ANDROID_SDK_ROOT=/opt/android-sdk-linux
-ENV PATH=$PATH:$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools
+# Variáveis Android
+ENV ANDROID_SDK_ROOT=/opt/android-sdk
+ENV PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator
 
-# Instalar dependências essenciais para Android SDK e builds React Native
-RUN apk add --no-cache \
+# Dependências essenciais
+RUN apt-get update && apt-get install -y --no-install-recommends \
     bash \
     curl \
     git \
     git-lfs \
-    openjdk17 \
+    openjdk-17-jdk-headless \
     python3 \
-    make \
-    g++ \
-    gcc \
-    libc6-compat \
     unzip \
+    zip \
+    build-essential \
+    ninja-build \
+    cmake \
     jq \
-    github-cli
+    && rm -rf /var/lib/apt/lists/*
 
-# Baixar e instalar Android SDK Command Line Tools
-RUN mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools && \
+# Instalar Android SDK CLT
+RUN mkdir -p $ANDROID_SDK_ROOT/cmdline-tools && \
     cd /tmp && \
-    curl -o cmdline-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-9123335_latest.zip && \
-    unzip cmdline-tools.zip && \
-    mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools/latest && \
-    mv cmdline-tools/* ${ANDROID_SDK_ROOT}/cmdline-tools/latest/ && \
-    rm -rf cmdline-tools.zip cmdline-tools
+    curl -o cmdline-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip && \
+    unzip cmdline-tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools && \
+    mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest && \
+    rm -rf cmdline-tools.zip
 
-# Atualizar SDK Manager e aceitar licenças
-RUN yes | sdkmanager --licenses
+# Aceitar licenças (sdkmanager fica disponível no PATH acima)
+RUN yes | sdkmanager --licenses || true
 
-# Instalar as plataformas e ferramentas Android necessárias
-RUN sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0"
+# Instalar SDK + NDK + CMake necessários para React Native Vision Camera
+RUN sdkmanager --install \
+    "platform-tools" \
+    "platforms;android-34" \
+    "build-tools;34.0.0" \
+    "cmake;3.22.1" \
+    "ndk;23.1.7779620" || true
 
-
-# Copia dependências do projeto
-WORKDIR /workspace
-COPY package*.json ./
-
-# Instalar pacotes npm
-RUN npm install
-
-# Copia o projeto
-COPY . .
-
-# Desabilita espera por comandos
+# Expo envs
 ENV EXPO_NO_DOCTOR=1
-ENV CI=true
+ENV CI=false
+ENV METRO_FORCE_POLLING=1
 
-# Atualizar o endereço da máquina no Manifest
-RUN npx expo prebuild --non-interactive
-
-# Definir CMD padrão para abrir shell
-CMD ["bash"]
+CMD ["sleep", "infinity"]

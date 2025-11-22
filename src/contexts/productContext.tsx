@@ -1,13 +1,16 @@
-import {
+import React, {
   createContext,
   useCallback,
   ReactNode,
   useContext,
 } from "react";
-import { useQuery, UseQueryResult, QueryClientProvider, QueryClient} from "@tanstack/react-query";
+import {
+  useQuery,
+  UseQueryResult,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import { apiFetch } from "../utils/api";
-
-const queryClient = new QueryClient();
 
 export interface ListedProduct {
   id: number;
@@ -28,39 +31,50 @@ const ProductContext = createContext<ProductDataContextType | null>(null);
 
 async function fetchProducts(): Promise<ListedProduct[]> {
   const response = await apiFetch(["products"], { method: "GET" }, true);
-  const data = await response.json();
-  return data;
+  return response.json();
 }
 
-export function ProductDataProvider({ children }: { children: ReactNode }) {
-  const {
-    data: products,
-    isLoading,
-    error,
-    refetch,
-  }: UseQueryResult<ListedProduct[]> = useQuery({
-    queryKey: ["products"],
-    queryFn: fetchProducts,
-    staleTime: Infinity
-  });
+export function ProductProvider({ children }: { children: ReactNode }) {
+  const queryClient = new QueryClient();
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <InnerProductProvider>{children}</InnerProductProvider>
+    </QueryClientProvider>
+  );
+}
+
+function InnerProductProvider({ children }: { children: ReactNode }) {
+  const { data, isLoading, error, refetch }: UseQueryResult<ListedProduct[]> =
+    useQuery({
+      queryKey: ["products"],
+      queryFn: fetchProducts,
+      staleTime: Infinity,
+    });
 
   const updateProductList = useCallback(() => {
     refetch();
   }, [refetch]);
 
   return (
-    <QueryClientProvider client={queryClient} >
-      <ProductContext.Provider
-        value={{ productsData: products, isLoading, error, updateProductList }}
-      >
-        {children}
-      </ProductContext.Provider>
-    </QueryClientProvider>
+    <ProductContext.Provider
+      value={{
+        productsData: data,
+        isLoading,
+        error,
+        updateProductList,
+      }}
+    >
+      {children}
+    </ProductContext.Provider>
   );
 }
 
 export function useProductsData() {
   const ctx = useContext(ProductContext);
-  if (!ctx) throw new Error("useProducts deve ser usado dentro de <ProductProvider>");
+  if (!ctx)
+    throw new Error(
+      "useProductsData deve ser usado dentro de <ProductProvider>"
+    );
   return ctx;
 }

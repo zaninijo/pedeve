@@ -1,20 +1,12 @@
 {
-  "name": "React Native Bare + Android SDK + Expo",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": ".."
-  },
+  "name": "Node + React Native Bare + Android SDK + Expo",
+  "dockerComposeFile": [
+    "docker-compose.yml"
+  ],
+  "service": "app",
+  "workspaceFolder": "/workspaces/pedeve",
   "postStartCommand": "node scripts/portPublisher.js",
   "remoteUser": "root",
-  "forwardPorts": [
-    19000,
-    19001,
-    19002,
-    8081
-  ],
-  "publicPorts": [
-    8081
-  ],
   "customizations": {
     "vscode": {
       "settings": {
@@ -22,7 +14,6 @@
       },
       "extensions": [
         "dsznajder.es7-react-js-snippets",
-        "msjsdiag.debugger-for-chrome",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode"
       ],

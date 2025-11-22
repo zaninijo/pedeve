@@ -4,7 +4,7 @@ import { borderRadius, colors, spacing, text } from '../styles/globalStyles';
 const style = StyleSheet.create({
   btnOuter: {
     borderColor: colors.offBlack,
-    borderWidth: "2px",
+    borderWidth: 2,
     borderStyle: "solid",
     padding: spacing.m,
     borderRadius: borderRadius.s,

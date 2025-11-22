@@ -1,4 +1,4 @@
-package com.pentdraiveapp
+package com.pentdraive.app
 
 import android.os.Build
 import android.os.Bundle

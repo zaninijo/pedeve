@@ -1,14 +1,14 @@
 import { useState, useMemo, ReactNode, ComponentType, useCallback } from "react";
 
 export default function useModal() {
-  const [modal, setModal] = useState<ReactNode>(null);
+  const [Modal, setModal] = useState<ReactNode>(null);
 
-  const showModal = useCallback(<P extends object = {}>(
-    Modal: ComponentType<P>,
+  const showModal = useCallback(<P extends object>(
+    Modal: ComponentType<P & { onClose?: () => void }>,
     props?: P
   ) => {
     
-    setModal(<Modal {...(props as P)||{}} onClose={flushModal} />);
+    setModal(<Modal {...props} onClose={flushModal} />);
   }, []);
 
   function flushModal() {
@@ -17,10 +17,10 @@ export default function useModal() {
 
   return useMemo(
     () => ({
-      modal,
+      Modal: Modal || null,
       showModal,
       flushModal
     }),
-    [modal, showModal, flushModal]
+    [Modal, showModal, flushModal]
   );
 }

@@ -39,6 +39,9 @@ export function CartContextProvider({ children }: { children: ReactNode }) {
   const cart = useRef<CartItem[]>([]);
   const subscribers = useRef(new Set<() => void>());
 
+  // Armazena o snapshot memoizado
+  const snapshotRef = useRef<CartItem[]>(cart.current.slice());
+
   const subscribe = useCallback((listener: () => void) => {
     subscribers.current.add(listener);
     return () => subscribers.current.delete(listener);
@@ -51,16 +54,21 @@ export function CartContextProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const getSnapshot = useCallback(() => cart.current.slice(), []);
+  // getSnapshot memoizado: só retorna um novo array se algo mudou
+  const getSnapshot = useCallback(() => {
+    if (!areArraysEqual(snapshotRef.current, cart.current)) {
+      snapshotRef.current = cart.current.slice();
+    }
+    return snapshotRef.current;
+  }, []);
 
   const addCartProduct = useCallback(
     (barcode: number) => {
       const product = productsData!.find((p) => p.barcode === barcode);
-
       if (!product) {
         Alert.alert(
           "Houve um problema",
-          "Um ou mais produtos escaneados não foram encontrado em nosso sistema, eles não serão incluídos no carrinho. Por favor, devolva o(s) produto(s) que não estiver(em) listados no carrinho."
+          "Um ou mais produtos escaneados não foram encontrados em nosso sistema..."
         );
         return;
       }
@@ -104,7 +112,6 @@ export function CartContextProvider({ children }: { children: ReactNode }) {
       notifyAll(prev);
     }
   }, [notifyAll]);
-
 
   const getCartInfo = useCallback((): CartInfo => {
     const items = cart.current;

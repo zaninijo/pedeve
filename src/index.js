@@ -1,6 +1,6 @@
 import { registerRootComponent } from "expo";
 import App from "./App";
-import GlobalProviderWrapper from './contexts/globalProviderWrapper';
+import GlobalProviderWrapper from './components/GlobalProviderWrapper';
 
 function Root() {
     return (

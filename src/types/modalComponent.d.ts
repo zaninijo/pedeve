@@ -1,7 +1,7 @@
 import { ComponentType, ReactNode } from 'react';
 
 type ModalProps = {
-  onClose?: () => any,
+  onClose: () => any,
   children?: ReactNode
 }
 

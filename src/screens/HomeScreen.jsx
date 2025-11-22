@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback, Pressable, Text } from "react-native";
 import { useNavContext } from "../contexts/NavContext";
 import { useProductsData } from "../contexts/ProductContext";
 import { useCart } from "../contexts/CartContext";
@@ -6,17 +6,14 @@ import defaultAlert from "../utils/defaultAlert";
 import { useEffect } from "react";
 import useModal from "../hooks/useModal";
 import AdminAuthModal from '../components/modals/AdminAuthModal';
+import { text, colors } from "../styles/globalStyles";
 
 const styles = StyleSheet.create({
   fullscreen: {
     flex: 1,
     flexGrow: 1,
     backgroundColor: "#111",
-  },
-  text: {
-    color: "white",
-    fontSize: 22,
-  },
+  }
 });
 
 export default function HomeScreen() {
@@ -26,7 +23,7 @@ export default function HomeScreen() {
   const { showModal, flushModal } = useModal();
 
   // Limpa o carrinho toda vez que abre a tela
-  useEffect(flushCart, []);
+  useEffect(() => flushCart(), []);
 
   return (
     <TouchableWithoutFeedback
@@ -45,28 +42,34 @@ export default function HomeScreen() {
         goToScreen("scanner");
       }}
     >
-      <Text style={styles.text}>Pentdraive 🟢</Text>
-      <Text>Aperte aqui para começar a comprar!</Text>
+      <View style={{backgroundColor: colors.creamyWhite}}>
+        <Text style={text.heading}>Pentdraive</Text>
+        <View>
+          <Text>Toque para começar</Text>
+        </View>
 
-      <link
-        onClick={() => {
-          showModal(AdminAuthModal, { onClose: flushModal });
-        }}
-        // Sobrepondo a captura do TouchableWithoutFeedback
-        style={{ zIndex: 5 }}
-      >
-        Abrir painel de gerenciamento para administradores.
-      </link>
+        <Pressable
+          onClick={() => {
+            showModal(AdminAuthModal, { onClose: flushModal });
+          }}
+          // Sobrepondo a captura do TouchableWithoutFeedback
+          style={{ zIndex: 5 }}
+        >
+          <Text>
+            Abrir painel de gerenciamento para administradores.
+          </Text>
+        </Pressable>
 
-      {
-        // Overlay durante o fetch da lista de produtos
-        // TODO: Adicionar spinner de carregamento
-        productListLoading && (
-          <View>
-            <Text>Carregando</Text>
-          </View>
-        )
-      }
+        {
+          // Overlay durante o fetch da lista de produtos
+          // TODO: Adicionar spinner de carregamento
+          productListLoading && (
+            <View>
+              <Text>Carregando</Text>
+            </View>
+          )
+        }
+      </View>
     </TouchableWithoutFeedback>
   );
 }

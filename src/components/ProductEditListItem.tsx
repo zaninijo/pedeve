@@ -7,7 +7,6 @@ import { useState } from "react";
 import StockEditModal from "./modals/StockEditModal";
 import ConfirmationModal from "./modals/ConfirmationModal";
 
-
 const style = StyleSheet.create({
 
 })

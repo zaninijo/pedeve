@@ -30,7 +30,10 @@ const BaseModal: ModalComponent = ({onClose, children}) => {
       <View>
         {children}
       </View>
-      <TouchableWithoutFeedback onPressOut={close} /> {/* Overlay que borra o fundo e serve como escape do modal */}
+      {/* Overlay que borra o fundo e serve como escape do modal */}
+      <TouchableWithoutFeedback onPressOut={close}>
+        <View />
+      </TouchableWithoutFeedback> 
     </View>
   </ModalContext.Provider>
 }

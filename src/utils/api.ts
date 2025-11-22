@@ -1,9 +1,11 @@
-import { API_ADDRESS } from "../../app.config";
 import { safeRead, tokenStoreKey } from "../contexts/AuthContext";
+import expoEnv from "../expoEnv";
 
 export const apiEndpoints: {[endpointName: string]: string[]} = {
     productFetch: [""]
 }
+
+const { API_ADDRESS } = expoEnv;
 
 const apiAddress = new URL(API_ADDRESS);
 

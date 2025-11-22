@@ -1,4 +1,4 @@
-package com.pentdraiveapp
+package com.pentdraive.app
 
 import android.app.Application
 import android.content.res.Configuration

@@ -72,7 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 export function useAuth() {
   const ctx = useContext(AuthContext);
   if (!ctx) {
-    throw new Error("useNavContext deve ser usado dentro de <AuthProvider>");
+    throw new Error("useAuthContext deve ser usado dentro de <AuthProvider>");
   }
   return ctx;
 }

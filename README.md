@@ -73,21 +73,23 @@ Etapas previstas:
 
 ## 🖥️ Instruções de Desenvolvimento
 
-O ambiente de desenvolvimento roda em uma container Docker com o Android SDK, o que deixa o processo altamente portátil, pensado para o desenvolvimento em nuvem com o GitHub Codespaces.
+O ambiente de desenvolvimento roda em um container Docker com o Android SDK, o que deixa o processo altamente portátil, pensado para o desenvolvimento em nuvem com o GitHub Codespaces e Visual Studio Code.
 
 > Antes de iniciar, leia e configure os arquivos de ambiente:
 - `.devcontainer/devcontainer.json`  
-- `app.config.json`  
+- `app.config.js`  
+- `env.server.js`  
 
-Para **servir o aplicativo** com atualizações de JavaScript OTA (Over-The-Air):
+Para desenvolver para android via Metro e ADB:
 ```bash
-npm run serve
+npm run start
 ```
-Ou para desenvolver na web, padrão Expo:
+Ou para desenvolver na web (testar estilos, componentes, etc.)
 ```bash
-npx expo start
+npm run web
 ```
-Para **gerar uma build nova**:
+Para **gerar uma build nova** e servir o .apk para testes:
+> *Necessário na primeira execução em ambientes novos*
 ```bash
-npm run serve:build
+npm run start:build
 ```
