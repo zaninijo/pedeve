@@ -3,7 +3,7 @@ import { ModalComponent } from "../../types/modalComponent";
 import BaseModal, { ModalContextConsumer } from "../BaseModal";
 import ButtonS from "../ButtonS"
 import { Text, View } from "react-native";
-import { colors } from "../../styles/globalStyles";
+import { colorDict } from "../../styles/globalStyles";
 import BarcodeScanner from "../BarcodeScanner";
 
 type BarcodeScannerModalProps = {
@@ -15,7 +15,7 @@ const BarcodeScannerModal: ModalComponent<BarcodeScannerModalProps> = ({onClose,
   return <BaseModal onClose={onClose}>
     <Text>Registre as informações do produto a seguir:</Text>
     <BarcodeScanner scanCallback={callback} />
-    <ButtonS color={colors.white} callback={callback}>Cancel</ButtonS>
+    <ButtonS color={colorDict.white} callback={callback}>Cancel</ButtonS>
   </BaseModal>
 }
 

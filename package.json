@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "web": "expo start -w",
-    "android": "node scripts/startDev.js",
-    "start": "node scripts/startDev.js",
+    "android": "expo start -a",
+    "start": "expo start -a",
+    "start:serve-apk": "node scripts/startDev.js",
     "start:build": "node scripts/startDev.js --build",
     "ios": "expo run:ios"
   },

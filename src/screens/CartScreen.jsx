@@ -4,11 +4,11 @@ import CartListItem from "../components/CartListItem";
 import { useCallback } from "react";
 import ButtonL from "../components/ButtonL";
 import { useNavContext } from "../contexts/NavContext";
-import { colors } from "../styles/globalStyles";
+import { colorDict } from "../styles/globalStyles";
 
 export default function CartScreen() {
   
-  const { cart, updateCartProduct } = useCart();
+  const { cart, updateCartProduct, getCartInfo } = useCart();
 
   const { goToScreen } = useNavContext()
 
@@ -38,9 +38,12 @@ export default function CartScreen() {
         }
 
       </ScrollView>
-      <ButtonL color={colors.white} callback={() => {goToScreen("scanner")}}>Escanear Produto</ButtonL>
-      <ButtonL color={colors.peacockTeal} callback={() => {goToScreen("checkout")}}>Finalizar Compra</ButtonL>
-      <ButtonL color={colors.rubyRed} callback={() => {goToScreen("home")}}>Cancelar</ButtonL>
+      <ButtonL color={colorDict.white} callback={() => {goToScreen("scanner")}}>Escanear Produto</ButtonL>
+      <ButtonL color={colorDict.peacockTeal} callback={() => { 
+        const { isEmpty }= getCartInfo();
+        isEmpty ? goToScreen("home") : goToScreen("checkout");
+      }}>Finalizar Compra</ButtonL>
+      <ButtonL color={colorDict.rubyRed} callback={() => {goToScreen("home")}}>Cancelar</ButtonL>
     </View>
   )
 }

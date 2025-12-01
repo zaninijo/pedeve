@@ -1,20 +1,20 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { borderRadius, colors, spacing, text } from '../styles/globalStyles';
+import { borderRadiusDict, colorDict, spacingDict, textStyle } from '../styles/globalStyles';
 
 const style = StyleSheet.create({
   btnOuter: {
-    borderColor: colors.offBlack,
+    borderColor: colorDict.offBlack,
     borderWidth: 2,
     borderStyle: "solid",
-    padding: spacing.m,
-    borderRadius: borderRadius.s,
+    padding: spacingDict.s,
+    borderRadius: borderRadiusDict.s,
   }
 });
 
-export default function ButtonS({ color=colors.white, textColor=colors.offBlack, callback, disabled=false, children }) {
+export default function ButtonS({ color=colorDict.white, textColor=colorDict.offBlack, callback, disabled=false, children }) {
   return (
     <TouchableOpacity style={{...style.btnOuter, backgroundColor: color}} onPress={callback}>
-      <Text style={ { ...text.m, color: textColor, }}>{ children }</Text>
+      <Text style={ { ...textStyle.m, color: textColor, fontWeight: "bold", elevation: 2}}>{ children }</Text>
     </TouchableOpacity>
   )
 }

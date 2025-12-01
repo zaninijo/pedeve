@@ -66,7 +66,7 @@ export default function IdleManager({ callbacks }: IdleTouchLayerProps) {
     <View
       {...panResponder.panHandlers}
       style={styles.overlay}
-      pointerEvents="auto"
+      pointerEvents="box-none"
     />
   );
 }

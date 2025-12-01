@@ -4,7 +4,7 @@ import BaseModal, { ModalContextConsumer } from "../BaseModal";
 import ButtonS from "../ButtonS"
 import InputBox from '../InputBox'
 import { Text, View } from "react-native";
-import { colors } from "../../styles/globalStyles";
+import { colorDict } from "../../styles/globalStyles";
 import { ListedProduct } from "../../contexts/ProductContext";
 
 type StockEditModalProps = {
@@ -27,7 +27,7 @@ const StockEditModal: ModalComponent<StockEditModalProps> = ({onClose, productDa
           <InputBox defaultValue={stockInput.current?.toString()} placeholder="Quantidade" onChangeText={(t) => {stockInput.current = Number(t)}} />
           <ButtonS callback={incrementStock(1)}>+</ButtonS>
         </View>
-        <ButtonS color={colors.white} callback={() => {
+        <ButtonS color={colorDict.white} callback={() => {
           saveChangesCb({...productData, stock: stockInput.current})
           close();
         }}>Salvar</ButtonS>

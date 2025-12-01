@@ -3,7 +3,6 @@ import { apiFetch } from "../utils/api";
 import * as SecureStore from 'expo-secure-store'
 
 export const tokenStoreKey = "auth_token"
-export const passwordStoreKey = "auth_password"
 
 export async function safeStore(key: string, value: string|null) {
   if (!value) {
@@ -35,7 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const passwordLogin = useCallback(
     async function (password: string): Promise<{token: string, password: string}|null> {
       // TODO: integrar com api
-  
+
       const response = await apiFetch(["auth", "login"], {
         method: "POST",
         headers: {
@@ -45,7 +44,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           credential: password
         })
       }, false);
-  
+
+
       if (response.ok) {
         const data = await response.json();
         const token: string = data.token;

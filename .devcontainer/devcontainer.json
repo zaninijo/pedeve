@@ -5,7 +5,7 @@
   ],
   "service": "app",
   "workspaceFolder": "/workspaces/pedeve",
-  "postStartCommand": "node scripts/portPublisher.js",
+  "postStartCommand": "mkdir -p /workspaces/pedeve",
   "remoteUser": "root",
   "customizations": {
     "vscode": {

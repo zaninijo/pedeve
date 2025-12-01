@@ -40,9 +40,7 @@ RUN sdkmanager --install \
     "cmake;3.22.1" \
     "ndk;23.1.7779620" || true
 
-# Expo envs
-ENV EXPO_NO_DOCTOR=1
-ENV CI=false
-ENV METRO_FORCE_POLLING=1
+# Expor portas padrão do Expo/Metro e android SDK
+EXPOSE 8081 5037 19000 19001 19002
 
 CMD ["sleep", "infinity"]

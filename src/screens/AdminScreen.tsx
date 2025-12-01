@@ -1,7 +1,7 @@
 import { View, ScrollView } from "react-native";
 import { useNavContext } from "../contexts/NavContext"
 import ButtonL from "../components/ButtonL";
-import { colors } from "../styles/globalStyles";
+import { colorDict } from "../styles/globalStyles";
 import { ListedProduct, useProductsData } from "../contexts/ProductContext";
 import ProductEditListItem from "../components/ProductEditListItem"
 import { useCallback, useState } from "react";
@@ -69,8 +69,8 @@ export default function AdminScreen() {
       })}
     </ScrollView>
 
-    <ButtonL color={colors.white} callback={() => showModal(ProductEditModal, { saveChangesCb: setProduct })}>Adicionar Produto</ButtonL>
-    <ButtonL color={colors.peacockTeal} callback={() => { goToScreen("home") }}>Finalizar Edição</ButtonL>
+    <ButtonL color={colorDict.white} callback={() => showModal(ProductEditModal, { saveChangesCb: setProduct })}>Adicionar Produto</ButtonL>
+    <ButtonL color={colorDict.peacockTeal} callback={() => { goToScreen("home") }}>Finalizar Edição</ButtonL>
   </View>
 
 }

@@ -4,7 +4,7 @@ import BaseModal, { ModalContextConsumer } from "../BaseModal";
 import ButtonS from "../ButtonS"
 import InputBox from '../InputBox'
 import { Text, View } from "react-native";
-import { colors } from "../../styles/globalStyles";
+import { colorDict } from "../../styles/globalStyles";
 import { ListedProduct } from "../../contexts/ProductContext";
 import useModal from "../../hooks/useModal";
 import BarcodeScannerModal from "./BarcodeScannerModal";
@@ -47,7 +47,7 @@ const ProductEditModal: ModalComponent<ProductEditModalProps> = ({onClose, produ
           }}>Escanear</ButtonS>
         </View>
 
-        <ButtonS color={colors.white} callback={() => {
+        <ButtonS color={colorDict.white} callback={() => {
           close();
           
           const pdata = productData as ListedProduct;

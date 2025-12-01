@@ -1,26 +1,47 @@
-import { useState, useMemo, ReactNode, ComponentType, useCallback } from "react";
+import { createContext, useContext, useState, ReactNode, ComponentType, useCallback, useMemo } from "react";
 
-export default function useModal() {
+type ModalContextType = {
+  Modal: ReactNode;
+  showModal: <P extends object>(modal: ComponentType<P & { onClose?: () => void }>, props?: P) => void;
+  flushModal: () => void;
+};
+
+const ModalContext = createContext<ModalContextType>({
+  Modal: null,
+  showModal: () => {},
+  flushModal: () => {},
+});
+
+export function ModalProvider({ children }: { children: ReactNode }) {
   const [Modal, setModal] = useState<ReactNode>(null);
 
-  const showModal = useCallback(<P extends object>(
-    Modal: ComponentType<P & { onClose?: () => void }>,
-    props?: P
-  ) => {
-    
-    setModal(<Modal {...props} onClose={flushModal} />);
+  const flushModal = useCallback(() => {
+    setModal(null);
   }, []);
 
-  function flushModal() {
-    setModal(null);
-  }
+  const showModal = useCallback(<P extends object>(
+    ModalComponent: ComponentType<P & { onClose?: () => void }>,
+    props?: P
+  ) => {
+    setModal(<ModalComponent {...props} onClose={flushModal} />);
+  }, [flushModal]);
 
-  return useMemo(
+  const value = useMemo(
     () => ({
-      Modal: Modal || null,
+      Modal,
       showModal,
-      flushModal
+      flushModal,
     }),
     [Modal, showModal, flushModal]
   );
+
+  return (
+    <ModalContext.Provider value={value}>
+      {children}
+    </ModalContext.Provider>
+  );
+}
+
+export default function useModal() {
+  return useContext(ModalContext);
 }

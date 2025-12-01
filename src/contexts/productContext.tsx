@@ -3,6 +3,7 @@ import React, {
   useCallback,
   ReactNode,
   useContext,
+  useState,
 } from "react";
 import {
   useQuery,
@@ -31,12 +32,12 @@ const ProductContext = createContext<ProductDataContextType | null>(null);
 
 async function fetchProducts(): Promise<ListedProduct[]> {
   const response = await apiFetch(["products"], { method: "GET" }, true);
-  return response.json();
+  const text = await response.text();
+  return JSON.parse(text);
 }
 
 export function ProductProvider({ children }: { children: ReactNode }) {
-  const queryClient = new QueryClient();
-
+  const [queryClient] = useState(() => new QueryClient());
   return (
     <QueryClientProvider client={queryClient}>
       <InnerProductProvider>{children}</InnerProductProvider>
@@ -72,9 +73,8 @@ function InnerProductProvider({ children }: { children: ReactNode }) {
 
 export function useProductsData() {
   const ctx = useContext(ProductContext);
-  if (!ctx)
-    throw new Error(
-      "useProductsData deve ser usado dentro de <ProductProvider>"
-    );
+  if (!ctx) {
+    throw new Error("useProductsData deve ser usado dentro de <ProductProvider>");
+  }
   return ctx;
 }

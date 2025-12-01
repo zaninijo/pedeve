@@ -1,0 +1,17 @@
+sync:
+  app-sync:
+    alpha: ".."
+    beta: "docker://pedeve-dev-server/workspaces/pedeve"
+    mode: "two-way-resolved"
+    ignore:
+      vcs: true
+      paths:
+        - node_modules
+        - .expo
+        - .expo-shared
+        - dist
+        - build
+        - .vscode
+    permissions:
+      defaultFileMode: "0644"
+      defaultDirectoryMode: "0755"

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const colors = {
+export const colorDict = {
     rubyRed: "#EF6565",
     peacockTeal: "#00B295",
     white: "#ffffff",
@@ -8,23 +8,25 @@ export const colors = {
     offBlack: "#020402"
 }
 
-export const spacing = {
-    l: "16",
-    m: "14",
-    s: "10"
+export const spacingDict = {
+    xl: 32,
+    l: 16,
+    m: 14,
+    s: 10
 }
 
-export const borderRadius = {
-    l: "8",
-    s: "4"
+export const borderRadiusDict = {
+    l: 8,
+    s: 4
 }
 
-export const text = StyleSheet.create({
+export const textStyle = StyleSheet.create({
     heading: {
         fontFamily: "Baloo2_700Bold",
         fontSize: 72,
         fontWeight: "700",
         letterSpacing: -0.6,
+        textAlign: "center"
     },
 
     xl: {
@@ -32,6 +34,8 @@ export const text = StyleSheet.create({
         fontSize: 20,
         fontWeight: "700",
         letterSpacing: 0,
+        textAlign: "center"
+        
     },
 
     l: {
@@ -39,6 +43,8 @@ export const text = StyleSheet.create({
         fontSize: 17,
         fontWeight: "600",
         letterSpacing: 0,
+        textAlign: "center"
+
     },
 
     m: {
@@ -46,6 +52,8 @@ export const text = StyleSheet.create({
         fontSize: 16,
         fontWeight: "400",
         letterSpacing: 0,
+        textAlign: "center"
+
     },
 
     m_mono: {
@@ -53,6 +61,8 @@ export const text = StyleSheet.create({
         fontSize: 16,
         fontWeight: "400",
         letterSpacing: 0,
+        textAlign: "center"
+
     },
 
     s: {
@@ -60,5 +70,7 @@ export const text = StyleSheet.create({
         fontSize: 14,
         fontWeight: "400",
         letterSpacing: 0,
+        textAlign: "center"
+
     },
 });

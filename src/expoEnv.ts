@@ -2,6 +2,7 @@ import Constants from 'expo-constants'
 
 type expoConst =  {
     "API_ADDRESS": string,
+    "FAKE_API": boolean,
     "INACTIVITY_WARNING": number,
     "INACTIVITY_TRIGGER": number
 }

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Text } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import { useCameraPermission, useCameraDevice, Camera, useCodeScanner, CameraPosition } from "react-native-vision-camera"
 import defaultAlert from "../utils/defaultAlert";
 import { useNavContext } from "../contexts/NavContext";
@@ -11,7 +11,7 @@ type BarcodeScannerProps = {
 
 export default function BarcodeScanner({ cameraDevice="front", scanCallback }: BarcodeScannerProps) {
   const { hasPermission, requestPermission } = useCameraPermission();
-  const { OverrideActiveScreen } = useNavContext()
+  const { OverrideActiveScreen } = useNavContext();
 
   useEffect(() => {
     if (hasPermission) return;
@@ -42,5 +42,13 @@ export default function BarcodeScanner({ cameraDevice="front", scanCallback }: B
     },
   )
 
-  return <Camera device={device} isActive={true} codeScanner={codeScanner} />
+  return (
+    <Camera
+      key={device?.id} 
+      device={device}
+      isActive={hasPermission}
+      codeScanner={codeScanner}
+      style={StyleSheet.absoluteFill}
+    />
+  );
 }
