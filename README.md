@@ -57,15 +57,15 @@ O front-end será responsável por:
 
 ## ⚙️ Status do Projeto
 
-🚧 **Em desenvolvimento** — atualmente na fase de estruturação dos componentes e layout base.  
+🚧 **Em desenvolvimento** — A aplicação está funcional para a finalidade de Proof of Concept. Faltam alguns polimentos e detalhar documentação.  
 
 Etapas previstas:
 - [x] Configuração inicial do projeto com Expo  
 - [x] Configuração do ambiente com Docker e Android SDK  
-- [ ] Estruturação da navegação e telas principais  
-- [ ] Implementação da UI responsiva  
-- [ ] Integração com câmera (leitura de código de barras)  
-- [ ] Integração com NFC para pagamentos  
+- [x] Estruturação da navegação e telas principais  
+- [x] Implementação da UI responsiva  
+- [x] Integração com câmera (leitura de código de barras)  
+- [x] Integração com NFC para pagamentos  
 - [ ] Conexão com API externa (em desenvolvimento por outro colaborador)
 - [ ] Criar documentação para desenvolvimento/uso do aplicativo
 
